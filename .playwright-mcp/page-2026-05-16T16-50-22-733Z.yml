@@ -1,0 +1,23 @@
+- main [ref=e3]:
+  - generic [ref=e4]:
+    - img "히어로 이미지" [ref=e6]
+    - generic [ref=e8]:
+      - paragraph [ref=e9]:
+        - text: ITS
+        - text: OUR
+        - text: PARTY
+        - text: DAY*
+      - generic [ref=e11]:
+        - paragraph [ref=e12]: 2026년 9월 20일 일요일 오후 1시
+        - paragraph [ref=e13]: 마리아쥬스퀘어
+  - generic [ref=e14]:
+    - generic [ref=e20]:
+      - generic [ref=e21]:
+        - generic [ref=e22]: 김상욱
+        - generic [ref=e23]: 이미자의 아들
+      - generic [ref=e24]: 신랑 김제형
+    - generic [ref=e30]:
+      - generic [ref=e31]:
+        - generic [ref=e32]: 김의진
+        - generic [ref=e33]: 김인숙의 딸
+      - generic [ref=e34]: 신부 김민아
