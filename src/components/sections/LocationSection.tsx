@@ -1,6 +1,10 @@
-import iconTmap from "../../assets/icon-tmap.png";
-import iconKakao from "../../assets/icon-kakao.png";
-import iconNaver from "../../assets/icon-naver.png";
+import iconTmap from "../../assets/icon-tmap.webp";
+import iconKakao from "../../assets/icon-kakao.webp";
+import iconNaver from "../../assets/icon-naver.webp";
+import mapImage from "../../assets/map.webp";
+import { Spacing } from "../Spacing";
+import { valueWithRatio } from "@/utils";
+import { useScale } from "@/context/ScaleContext";
 
 const NAV_BUTTONS = [
   {
@@ -21,63 +25,74 @@ const NAV_BUTTONS = [
 ];
 
 export default function LocationSection() {
+  const scale = useScale();
+
   return (
-    <section style={{ background: "#fafafa", paddingBottom: "56px" }}>
+    <section style={{ background: "#fafafa" }}>
+      <Spacing height={61} />
       {/* 섹션 제목 */}
-      <div style={{ padding: "61px 16px 0" }}>
-        <p
+      <div style={{ padding: `0 ${valueWithRatio(20, scale)}px` }}>
+        <div
           style={{
             fontFamily: "var(--font-display)",
             fontWeight: 700,
-            fontSize: "16px",
+            fontSize: 16,
             color: "#00a8a6",
-            margin: 0,
-            textTransform: "capitalize",
           }}
         >
           Location
-        </p>
-        <p
+        </div>
+
+        <Spacing height={8} />
+
+        <div
           style={{
             fontFamily: "var(--font-sans)",
             fontWeight: 500,
-            fontSize: "12px",
+            fontSize: 12,
             color: "#1e1e1e",
             opacity: 0.5,
-            margin: "8px 0 0",
           }}
         >
           오시는길
-        </p>
+        </div>
       </div>
 
       {/* 지도 이미지 영역 */}
       <div
         style={{
-          margin: "24px 34px 0",
-          aspectRatio: "323 / 278",
-          overflow: "hidden",
-          borderRadius: "1px",
+          padding: `0 ${valueWithRatio(29, scale)}px 0  ${valueWithRatio(38, scale)}px`,
         }}
       >
-        <img
-          src="https://placehold.co/323x278/e8e8e8/aaaaaa"
-          alt="마리아쥬스퀘어 약도"
+        <div
           style={{
-            width: "100%",
-            height: "100%",
-            objectFit: "cover",
-            display: "block",
+            aspectRatio: "323 / 278",
           }}
-        />
+        >
+          <img
+            src={mapImage}
+            alt="마리아쥬스퀘어 약도"
+            style={{
+              width: "100%",
+              height: "100%",
+              objectFit: "cover",
+              display: "block",
+            }}
+          />
+        </div>
       </div>
+
+      <Spacing height={37} />
 
       {/* 네비게이션 버튼 */}
       <div
         style={{
-          margin: "24px 20px 0",
+          padding: `0 ${valueWithRatio(20, scale)}px`,
           display: "flex",
-          gap: "10px",
+          justifyContent: "center",
+          alignItems: "center",
+          gap: 10,
+          flexWrap: "wrap",
         }}
       >
         {NAV_BUTTONS.map((btn) => (
@@ -87,17 +102,16 @@ export default function LocationSection() {
             target="_blank"
             rel="noopener noreferrer"
             style={{
-              flex: 1,
               display: "flex",
               alignItems: "center",
               justifyContent: "center",
-              gap: "6px",
-              height: "40px",
+              gap: 6,
+              padding: 10,
               background: "#fff",
               border: "1px solid #e7e7e7",
-              borderRadius: "4px",
-              textDecoration: "none",
+              borderRadius: 4,
               cursor: "pointer",
+              textDecoration: "none",
             }}
           >
             {/* 아이콘 영역 */}
@@ -105,38 +119,34 @@ export default function LocationSection() {
               style={{
                 width: "14px",
                 height: "14px",
-                flexShrink: 0,
-                overflow: "hidden",
               }}
             >
               <img
                 src={btn.icon}
-                alt=""
+                alt={btn.label}
                 style={{ width: "100%", height: "100%", objectFit: "cover" }}
               />
             </div>
-            <span
+            <div
               style={{
                 fontFamily: "var(--font-sans)",
                 fontWeight: 400,
-                fontSize: "13px",
+                fontSize: 13,
                 color: "#000",
-                whiteSpace: "nowrap",
               }}
             >
               {btn.label}
-            </span>
+            </div>
           </a>
         ))}
       </div>
 
+      <Spacing height={29} />
+
       {/* 교통 정보 */}
       <div
         style={{
-          margin: "32px 20px 0",
-          display: "flex",
-          flexDirection: "column",
-          gap: "16px",
+          padding: `0 ${valueWithRatio(22, scale)}px 0 ${valueWithRatio(18, scale)}px`,
         }}
       >
         <TransportItem label="지하철">
@@ -146,39 +156,59 @@ export default function LocationSection() {
               fontSize: "13px",
             }}
           >
-            <div style={{ lineHeight: "normal", marginBottom: "12px" }}>
-              <span style={{ color: "#808b00", fontWeight: 500 }}>7호선</span>
-              {"  "}
-              <span style={{ color: "#de9800", fontWeight: 500 }}>
+            <div style={{ display: "flex", gap: 7, alignItems: "center" }}>
+              <span
+                style={{
+                  color: "#808b00",
+                  fontWeight: 500,
+                  fontSize: 13,
+                  fontFamily: "var(--font-sans)",
+                  lineHeight: "normal",
+                }}
+              >
+                7호선
+              </span>
+              <span
+                style={{
+                  color: "#de9800",
+                  fontWeight: 500,
+                  fontSize: 13,
+                  lineHeight: "normal",
+                }}
+              >
                 수인분당선
               </span>
             </div>
-            <p style={{ margin: 0, color: "#000", fontWeight: 400 }}>
+
+            <Spacing height={10} />
+
+            <div
+              style={{
+                color: "#000",
+                fontWeight: 400,
+                fontSize: 13,
+                fontFamily: "var(--font-sans)",
+              }}
+            >
               강남구청역 3번출구 (셔틀버스 운행)
-            </p>
+            </div>
           </div>
         </TransportItem>
-
-        <Divider />
 
         <TransportItem label="자차">
           <div
             style={{
               fontFamily: "var(--font-sans)",
               fontWeight: 400,
-              fontSize: "13px",
-              display: "flex",
-              flexDirection: "column",
-              gap: "12px",
+              fontSize: 13,
               color: "#000",
             }}
           >
-            <p style={{ margin: 0 }}>네비게이션 : '마리아쥬스퀘어' 검색</p>
-            <p style={{ margin: 0 }}>서울 강남구 도산대로 318</p>
+            <div>네비게이션 : '마리아쥬스퀘어' 검색</div>
+            <Spacing height={12} />
+            <div>서울 강남구 도산대로 318</div>
           </div>
         </TransportItem>
-
-        <Divider />
 
         <TransportItem label="주차">
           <p
@@ -194,6 +224,8 @@ export default function LocationSection() {
           </p>
         </TransportItem>
       </div>
+
+      <Spacing height={84} />
     </section>
   );
 }
@@ -206,31 +238,28 @@ function TransportItem({
   children: React.ReactNode;
 }) {
   return (
-    <div style={{ display: "flex", flexDirection: "column", gap: "12px" }}>
-      <p
+    <div>
+      <div
         style={{
           fontFamily: "var(--font-sans)",
           fontWeight: 500,
-          fontSize: "13px",
+          fontSize: 13,
           color: "#7eafae",
-          margin: 0,
         }}
       >
         {label}
-      </p>
+      </div>
+      <Spacing height={12} />
       {children}
+      <Spacing height={16} />
+      <div
+        style={{
+          width: "100%",
+          height: "1px",
+          background: "#e7e7e7",
+        }}
+      />
+      <Spacing height={16} />
     </div>
-  );
-}
-
-function Divider() {
-  return (
-    <div
-      style={{
-        width: "100%",
-        height: "1px",
-        background: "#e7e7e7",
-      }}
-    />
   );
 }
