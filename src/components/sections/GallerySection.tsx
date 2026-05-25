@@ -1,184 +1,207 @@
-import { useEffect, useRef, useState } from 'react'
-import stampTeal from '../../assets/stamp-teal.png'
+import { useState } from "react";
 
-// 약 30개의 갤러리 썸네일 (placeholder 색상 배열)
-const GALLERY_COLORS = [
-  '#6b5b4e', '#8b7355', '#a08060', '#c4a882', '#d4b896',
-  '#7d9b7d', '#5c7a5c', '#8e7d6e', '#b5a090', '#c8b5a5',
-  '#a89080', '#9b8878', '#7a6b5d', '#8c7b6c', '#bfaa95',
-  '#6b7a6b', '#9aab9a', '#5a6e5a', '#738473', '#485848',
-  '#c4b8a8', '#d8cfc5', '#a09888', '#8a8278', '#6e6660',
-  '#b8aba0', '#9c9088', '#7a7068', '#5e5850', '#4c4840',
-]
+interface GalleryItem {
+  id: number;
+  left: number;
+  top: number;
+  width: number;
+  height: number;
+}
 
-const GALLERY_ITEMS = GALLERY_COLORS.map((color, i) => ({ id: i, color }))
-const MAIN_PLACEHOLDER = 'https://placehold.co/324x427/6b5b4e/6b5b4e'
+// 피그마 기준 좌표 (left: 원본-16, top: 원본-158)
+const GALLERY_ITEMS: GalleryItem[] = [
+  // col 0 (x=0, w=150)
+  { id: 1,  left: 0,    top: 0,   width: 150, height: 224 },
+  { id: 2,  left: 0,    top: 230, width: 150, height: 224 },
+  { id: 3,  left: 0,    top: 460, width: 150, height: 100 },
+  // col 1 (x=156, w=160)
+  { id: 4,  left: 156,  top: 0,   width: 160, height: 276 },
+  { id: 5,  left: 156,  top: 282, width: 160, height: 278 },
+  // col 2 (x=322, w=150)
+  { id: 6,  left: 322,  top: 0,   width: 150, height: 224 },
+  { id: 7,  left: 322,  top: 230, width: 150, height: 100 },
+  { id: 8,  left: 322,  top: 336, width: 150, height: 224 },
+  // col 3 (x=478, w=150)
+  { id: 9,  left: 478,  top: 0,   width: 150, height: 224 },
+  { id: 10, left: 478,  top: 230, width: 150, height: 224 },
+  { id: 11, left: 478,  top: 460, width: 150, height: 100 },
+  // col 4 (x=634, w=150)
+  { id: 12, left: 634,  top: 0,   width: 150, height: 224 },
+  { id: 13, left: 634,  top: 230, width: 150, height: 100 },
+  { id: 14, left: 634,  top: 336, width: 150, height: 224 },
+  // col 5 (x=789, w=150)
+  { id: 15, left: 789,  top: 0,   width: 150, height: 112 },
+  { id: 16, left: 789,  top: 118, width: 150, height: 224 },
+  { id: 17, left: 789,  top: 348, width: 150, height: 212 },
+  // col 6 (x=945, w=150)
+  { id: 18, left: 945,  top: 0,   width: 150, height: 214 },
+  { id: 19, left: 945,  top: 220, width: 150, height: 110 },
+  { id: 20, left: 945,  top: 336, width: 150, height: 224 },
+  // col 7 (x=1101, w=150)
+  { id: 21, left: 1101, top: 0,   width: 150, height: 100 },
+  { id: 22, left: 1101, top: 106, width: 150, height: 224 },
+  { id: 23, left: 1101, top: 336, width: 150, height: 224 },
+  // col 8 (x=1257, w=150)
+  { id: 24, left: 1257, top: 0,   width: 150, height: 224 },
+  { id: 25, left: 1257, top: 230, width: 150, height: 100 },
+  { id: 26, left: 1257, top: 336, width: 150, height: 224 },
+  // col 9 (x=1413, w=150)
+  { id: 27, left: 1413, top: 0,   width: 150, height: 214 },
+  { id: 28, left: 1413, top: 220, width: 150, height: 226 },
+  { id: 29, left: 1413, top: 452, width: 150, height: 108 },
+];
+
+const CONTENT_WIDTH = 1413 + 150; // 1563px
+const CONTENT_HEIGHT = 560;
 
 export default function GallerySection() {
-  const [activeIndex, setActiveIndex] = useState(0)
-  const carouselRef = useRef<HTMLDivElement>(null)
-  const touchStartX = useRef(0)
-  const touchStartY = useRef(0)
-
-  // 활성 썸네일이 보이도록 캐러셀 스크롤
-  useEffect(() => {
-    const carousel = carouselRef.current
-    if (!carousel) return
-    const thumb = carousel.children[activeIndex] as HTMLElement
-    if (!thumb) return
-    const thumbLeft = thumb.offsetLeft
-    const thumbWidth = thumb.offsetWidth
-    const carouselWidth = carousel.offsetWidth
-    carousel.scrollTo({
-      left: thumbLeft - carouselWidth / 2 + thumbWidth / 2,
-      behavior: 'smooth',
-    })
-  }, [activeIndex])
-
-  const handleTouchStart = (e: React.TouchEvent) => {
-    touchStartX.current = e.touches[0].clientX
-    touchStartY.current = e.touches[0].clientY
-  }
-
-  const handleTouchEnd = (e: React.TouchEvent) => {
-    const dx = e.changedTouches[0].clientX - touchStartX.current
-    const dy = e.changedTouches[0].clientY - touchStartY.current
-    // 수평 스와이프만 처리 (수직 스크롤 우선)
-    if (Math.abs(dx) < Math.abs(dy)) return
-    if (dx > 50) {
-      setActiveIndex(prev => Math.max(0, prev - 1))
-    } else if (dx < -50) {
-      setActiveIndex(prev => Math.min(GALLERY_ITEMS.length - 1, prev + 1))
-    }
-  }
+  const [selected, setSelected] = useState<GalleryItem | null>(null);
 
   return (
     <section
       style={{
-        background: '#fff',
-        paddingBottom: '40px',
-        paddingTop: '50px',
+        width: "100%",
+        backgroundColor: "#fff",
+        paddingTop: "88px",
+        paddingBottom: "60px",
       }}
     >
-      {/* 섹션 헤더 */}
+      {/* 헤딩 */}
       <div
         style={{
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center',
-          gap: '4px',
-          marginBottom: '24px',
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+          gap: "4px",
+          marginBottom: "24px",
         }}
       >
-        <div style={{ width: '27px', height: '18px', overflow: 'hidden' }}>
-          <img
-            src={stampTeal}
-            alt=""
-            style={{
-              position: 'relative',
-              left: '-47%',
-              top: '-47%',
-              width: '194%',
-              height: '194%',
-              maxWidth: 'none',
-              objectFit: 'contain',
-            }}
+        {/* 하트 아이콘 */}
+        <svg
+          width="27"
+          height="18"
+          viewBox="0 0 27 18"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M13.5 15L2.5 5C2.5 2.5 4.5 0.5 7 0.5C9 0.5 10.5 1.5 13.5 4.5C16.5 1.5 18 0.5 20 0.5C22.5 0.5 24.5 2.5 24.5 5L13.5 15Z"
+            fill="#1e1e1e"
           />
-        </div>
+        </svg>
         <p
           style={{
-            fontFamily: '"SUIT Variable", sans-serif',
-            fontWeight: 700,
-            fontSize: '16px',
-            color: '#1e1e1e',
             margin: 0,
+            fontFamily: "var(--font-display)",
+            fontWeight: 700,
+            fontSize: "16px",
+            color: "#1e1e1e",
+            textAlign: "center",
           }}
         >
           Wedding Gallery
         </p>
       </div>
 
-      {/* 상단 메인 이미지 */}
+      {/* 가로 스크롤 이미지 영역 */}
       <div
         style={{
-          margin: '0 33px',
-          height: '427px',
-          borderRadius: '1px',
-          overflow: 'hidden',
-          cursor: 'pointer',
+          overflowX: "auto",
+          overflowY: "hidden",
+          paddingLeft: "16px",
+          msOverflowStyle: "none",
+          scrollbarWidth: "none",
         }}
-        onTouchStart={handleTouchStart}
-        onTouchEnd={handleTouchEnd}
       >
         <div
           style={{
-            width: '100%',
-            height: '100%',
-            background: GALLERY_ITEMS[activeIndex].color,
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            transition: 'background 0.3s ease',
+            position: "relative",
+            width: `${CONTENT_WIDTH}px`,
+            height: `${CONTENT_HEIGHT}px`,
+            flexShrink: 0,
           }}
         >
-          <img
-            src={MAIN_PLACEHOLDER}
-            alt=""
-            style={{
-              width: '100%',
-              height: '100%',
-              objectFit: 'cover',
-              opacity: 0,
-              position: 'absolute',
-            }}
-          />
-          <span
-            style={{
-              fontFamily: '"SUIT Variable", sans-serif',
-              fontSize: '13px',
-              color: 'rgba(255,255,255,0.6)',
-            }}
-          >
-            {activeIndex + 1} / {GALLERY_ITEMS.length}
-          </span>
+          {GALLERY_ITEMS.map((item) => (
+            <button
+              key={item.id}
+              onClick={() => setSelected(item)}
+              style={{
+                position: "absolute",
+                left: item.left,
+                top: item.top,
+                width: item.width,
+                height: item.height,
+                padding: 0,
+                border: "none",
+                cursor: "pointer",
+                overflow: "hidden",
+                borderRadius: "1px",
+                background: "transparent",
+              }}
+            >
+              <img
+                src={`https://placehold.co/${item.width}x${item.height}/c8c0b8/c8c0b8`}
+                alt={`갤러리 ${item.id}`}
+                style={{
+                  width: "100%",
+                  height: "100%",
+                  objectFit: "cover",
+                  display: "block",
+                }}
+              />
+            </button>
+          ))}
         </div>
       </div>
 
-      {/* 하단 캐러셀 */}
-      <div
-        ref={carouselRef}
+      {/* 안내 텍스트 */}
+      <p
         style={{
-          margin: '16px 33px 0',
-          display: 'flex',
-          gap: '8.4px',
-          overflowX: 'auto',
-          scrollbarWidth: 'none',
-          WebkitOverflowScrolling: 'touch',
-          scrollSnapType: 'x mandatory',
+          margin: "16px 0 0",
+          fontFamily: "var(--font-display)",
+          fontSize: "11px",
+          lineHeight: "normal",
+          letterSpacing: "-0.22px",
+          color: "#1e1e1e",
+          opacity: 0.7,
+          textAlign: "center",
         }}
-        className="hide-scrollbar"
       >
-        {GALLERY_ITEMS.map((item, i) => (
-          <button
-            key={item.id}
-            onClick={() => setActiveIndex(i)}
+        밀어서 볼 수 있습니다.
+        <br />
+        클릭하면 크게 볼수 있습니다.
+      </p>
+
+      {/* 이미지 확대 모달 */}
+      {selected && (
+        <div
+          role="dialog"
+          aria-modal="true"
+          aria-label="갤러리 이미지"
+          onClick={() => setSelected(null)}
+          style={{
+            position: "fixed",
+            inset: 0,
+            zIndex: 9999,
+            backgroundColor: "rgba(0,0,0,0.85)",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+          }}
+        >
+          <img
+            src={`https://placehold.co/${selected.width}x${selected.height}/c8c0b8/c8c0b8`}
+            alt="갤러리 이미지 확대"
             style={{
-              flexShrink: 0,
-              width: '60px',
-              height: '60px',
-              borderRadius: '1px',
-              background: item.color,
-              border: 'none',
-              cursor: 'pointer',
-              opacity: i === activeIndex ? 1 : 0.25,
-              transition: 'opacity 0.2s ease',
-              scrollSnapAlign: 'start',
-              outline: i === activeIndex ? '2px solid #00a8a6' : 'none',
-              outlineOffset: '1px',
+              maxWidth: "90vw",
+              maxHeight: "80vh",
+              objectFit: "contain",
+              borderRadius: "4px",
+              display: "block",
             }}
           />
-        ))}
-      </div>
+        </div>
+      )}
     </section>
-  )
+  );
 }
