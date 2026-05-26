@@ -143,171 +143,171 @@ function GalleryModal({ initialIndex, onClose }: GalleryModalProps) {
   const goNext = useCallback(() => emblaApi?.scrollNext(), [emblaApi]);
 
   return (
-    <RemoveScroll>
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        exit={{ opacity: 0 }}
-        transition={{ duration: 0.3 }}
-        role="dialog"
-        aria-modal="true"
-        aria-label="갤러리 이미지"
-        onClick={onClose}
-        style={{
-          position: "fixed",
-          top: 0,
-          left: 0,
-          right: 0,
-          bottom: 0,
-          zIndex: 9999,
-          backgroundColor: "rgba(0,0,0,0.8)",
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
-          justifyContent: "center",
-        }}
+    // <RemoveScroll>
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      transition={{ duration: 0.3 }}
+      role="dialog"
+      aria-modal="true"
+      aria-label="갤러리 이미지"
+      onClick={onClose}
+      style={{
+        position: "fixed",
+        top: 0,
+        left: 0,
+        right: 0,
+        bottom: 0,
+        zIndex: 9999,
+        backgroundColor: "rgba(0,0,0,0.8)",
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        justifyContent: "center",
+      }}
+    >
+      <div
+        onClick={(e) => e.stopPropagation()}
+        style={{ width: "90vw", maxWidth: 360 }}
       >
+        {/* 헤더: 카운터 + 닫기 */}
         <div
-          onClick={(e) => e.stopPropagation()}
-          style={{ width: "90vw", maxWidth: 360 }}
+          style={{
+            position: "relative",
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            height: 16,
+          }}
         >
-          {/* 헤더: 카운터 + 닫기 */}
-          <div
+          <span
             style={{
-              position: "relative",
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center",
-              height: 16,
+              color: "#fff",
+              fontFamily: "var(--font-display)",
+              fontSize: 13,
+              lineHeight: "normal",
+              fontWeight: 400,
+              letterSpacing: "-0.26px",
             }}
           >
-            <span
-              style={{
-                color: "#fff",
-                fontFamily: "var(--font-display)",
-                fontSize: 13,
-                lineHeight: "normal",
-                fontWeight: 400,
-                letterSpacing: "-0.26px",
-              }}
-            >
-              {currentIndex + 1}/{TOTAL_ITEMS}
-            </span>
-            <button
-              onClick={(e) => {
-                e.stopPropagation();
-                onClose();
-              }}
-              style={{
-                position: "absolute",
-                right: 0,
-                top: "50%",
-                transform: "translateY(-50%)",
-                background: "none",
-                border: "none",
-                cursor: "pointer",
-                padding: 0,
-                lineHeight: 0,
-              }}
-            >
-              <img
-                src={iconClose}
-                alt="닫기"
-                style={{ width: 16, height: 16, display: "block" }}
-              />
-            </button>
-          </div>
-
-          <Spacing height={53} />
-
-          {/* 이미지 캐러셀 + 화살표 */}
-          <div style={{ position: "relative" }}>
-            <div
-              ref={emblaRef}
-              style={{
-                overflow: "hidden",
-                borderRadius: 4,
-                aspectRatio: `${GALLERY_ITEMS[currentIndex].colWidth} / ${GALLERY_ITEMS[currentIndex].height}`,
-              }}
-            >
-              <div style={{ display: "flex", height: "100%" }}>
-                {GALLERY_ITEMS.map((item) => (
-                  <div
-                    key={item.id}
-                    style={{
-                      flex: "0 0 100%",
-                      minWidth: 0,
-                      height: "100%",
-                      backgroundImage: `url(${getGalleryImage(item.id)})`,
-                      backgroundSize: "cover",
-                      backgroundPosition: "center",
-                    }}
-                  ></div>
-                ))}
-              </div>
-            </div>
-
-            {/* 이전 버튼 */}
-            <button
-              onClick={(e) => {
-                e.stopPropagation();
-                goPrev();
-              }}
-              style={{
-                position: "absolute",
-                left: -18,
-                top: "50%",
-                transform: "translateY(-50%)",
-                background: "none",
-                border: "none",
-                cursor: "pointer",
-                padding: 0,
-                width: 36,
-                height: 36,
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-              }}
-            >
-              <img
-                src={iconArrowLeft}
-                alt="이전"
-                style={{ width: 36, height: 36, display: "block" }}
-              />
-            </button>
-
-            {/* 다음 버튼 */}
-            <button
-              onClick={(e) => {
-                e.stopPropagation();
-                goNext();
-              }}
-              style={{
-                position: "absolute",
-                right: -18,
-                top: "50%",
-                transform: "translateY(-50%)",
-                background: "none",
-                border: "none",
-                cursor: "pointer",
-                padding: 0,
-                width: 36,
-                height: 36,
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-              }}
-            >
-              <img
-                src={iconArrowRight}
-                alt="다음"
-                style={{ width: 36, height: 36, display: "block" }}
-              />
-            </button>
-          </div>
+            {currentIndex + 1}/{TOTAL_ITEMS}
+          </span>
+          <button
+            onClick={(e) => {
+              e.stopPropagation();
+              onClose();
+            }}
+            style={{
+              position: "absolute",
+              right: 0,
+              top: "50%",
+              transform: "translateY(-50%)",
+              background: "none",
+              border: "none",
+              cursor: "pointer",
+              padding: 0,
+              lineHeight: 0,
+            }}
+          >
+            <img
+              src={iconClose}
+              alt="닫기"
+              style={{ width: 16, height: 16, display: "block" }}
+            />
+          </button>
         </div>
-      </motion.div>
-    </RemoveScroll>
+
+        <Spacing height={53} />
+
+        {/* 이미지 캐러셀 + 화살표 */}
+        <div style={{ position: "relative" }}>
+          <div
+            ref={emblaRef}
+            style={{
+              overflow: "hidden",
+              borderRadius: 4,
+              aspectRatio: `${GALLERY_ITEMS[currentIndex].colWidth} / ${GALLERY_ITEMS[currentIndex].height}`,
+            }}
+          >
+            <div style={{ display: "flex", height: "100%" }}>
+              {GALLERY_ITEMS.map((item) => (
+                <div
+                  key={item.id}
+                  style={{
+                    flex: "0 0 100%",
+                    minWidth: 0,
+                    height: "100%",
+                    backgroundImage: `url(${getGalleryImage(item.id)})`,
+                    backgroundSize: "cover",
+                    backgroundPosition: "center",
+                  }}
+                ></div>
+              ))}
+            </div>
+          </div>
+
+          {/* 이전 버튼 */}
+          <button
+            onClick={(e) => {
+              e.stopPropagation();
+              goPrev();
+            }}
+            style={{
+              position: "absolute",
+              left: -18,
+              top: "50%",
+              transform: "translateY(-50%)",
+              background: "none",
+              border: "none",
+              cursor: "pointer",
+              padding: 0,
+              width: 36,
+              height: 36,
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+            }}
+          >
+            <img
+              src={iconArrowLeft}
+              alt="이전"
+              style={{ width: 36, height: 36, display: "block" }}
+            />
+          </button>
+
+          {/* 다음 버튼 */}
+          <button
+            onClick={(e) => {
+              e.stopPropagation();
+              goNext();
+            }}
+            style={{
+              position: "absolute",
+              right: -18,
+              top: "50%",
+              transform: "translateY(-50%)",
+              background: "none",
+              border: "none",
+              cursor: "pointer",
+              padding: 0,
+              width: 36,
+              height: 36,
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+            }}
+          >
+            <img
+              src={iconArrowRight}
+              alt="다음"
+              style={{ width: 36, height: 36, display: "block" }}
+            />
+          </button>
+        </div>
+      </div>
+    </motion.div>
+    // </RemoveScroll>
   );
 }
 
