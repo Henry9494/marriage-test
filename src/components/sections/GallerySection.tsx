@@ -111,10 +111,10 @@ const GALLERY_COLUMNS: Column[] = [
   },
 ];
 
-const TOTAL_ITEMS = GALLERY_COLUMNS.reduce(
-  (sum, col) => sum + col.items.length,
-  0,
+const GALLERY_ITEMS = GALLERY_COLUMNS.flatMap((col) =>
+  col.items.map((item) => ({ ...item, colWidth: col.width })),
 );
+const TOTAL_ITEMS = GALLERY_ITEMS.length;
 const CONTENT_HEIGHT = 560;
 const COLUMN_GAP = 6;
 
@@ -222,23 +222,28 @@ function GalleryModal({ initialIndex, onClose }: GalleryModalProps) {
 
           {/* 이미지 캐러셀 + 화살표 */}
           <div style={{ position: "relative" }}>
-            <div ref={emblaRef} style={{ overflow: "hidden", borderRadius: 4 }}>
-              <div style={{ display: "flex" }}>
-                {GALLERY_COLUMNS.flatMap((col) =>
-                  col.items.map((item) => (
-                    <div
-                      key={item.id}
-                      style={{
-                        flex: "0 0 100%",
-                        minWidth: 0,
-                        aspectRatio: "45 / 67",
-                        backgroundImage: `url(${getGalleryImage(item.id)})`,
-                        backgroundSize: "cover",
-                        backgroundPosition: "center",
-                      }}
-                    ></div>
-                  )),
-                )}
+            <div
+              ref={emblaRef}
+              style={{
+                overflow: "hidden",
+                borderRadius: 4,
+                aspectRatio: `${GALLERY_ITEMS[currentIndex].colWidth} / ${GALLERY_ITEMS[currentIndex].height}`,
+              }}
+            >
+              <div style={{ display: "flex", height: "100%" }}>
+                {GALLERY_ITEMS.map((item) => (
+                  <div
+                    key={item.id}
+                    style={{
+                      flex: "0 0 100%",
+                      minWidth: 0,
+                      height: "100%",
+                      backgroundImage: `url(${getGalleryImage(item.id)})`,
+                      backgroundSize: "cover",
+                      backgroundPosition: "center",
+                    }}
+                  ></div>
+                ))}
               </div>
             </div>
 
