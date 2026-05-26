@@ -1,7 +1,6 @@
 import { valueWithRatio } from "@/utils";
 import heroBg from "../../assets/hero-bg.webp";
 import { useScale } from "@/context/ScaleContext";
-import { MAX_WIDTH } from "@/constants";
 import { Spacing } from "../Spacing";
 
 export default function HeroSection() {
@@ -11,22 +10,20 @@ export default function HeroSection() {
     <>
       <section
         style={{
-          aspectRatio: `${MAX_WIDTH} / 844`,
+          aspectRatio: "61 / 132",
+          backgroundImage: `url(${heroBg})`,
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+        }}
+      />
+
+      <section
+        style={{
+          padding: `0 ${valueWithRatio(25, scale)}px`,
+          backgroundColor: "#fff",
+          fontFamily: "var(--font-display)",
         }}
       >
-        <img
-          src={heroBg}
-          alt="히어로 이미지"
-          style={{
-            width: "100%",
-            height: "100%",
-            objectFit: "cover",
-            display: "block",
-          }}
-        />
-      </section>
-
-      <section style={{ padding: `0 ${valueWithRatio(25, scale)}px` }}>
         <Spacing height={22} />
         <div
           style={{
@@ -34,6 +31,7 @@ export default function HeroSection() {
             fontSize: 24,
             lineHeight: "108%",
             letterSpacing: "-1.296px",
+            fontFamily: "var(--font-display)",
           }}
         >
           {"{ "}2026년 9월 20일 일요일 오후 1시{" }"}

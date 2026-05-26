@@ -67,19 +67,11 @@ export default function LocationSection() {
         <div
           style={{
             aspectRatio: "323 / 278",
+            backgroundImage: `url(${mapImage})`,
+            backgroundSize: "cover",
+            backgroundPosition: "center",
           }}
-        >
-          <img
-            src={mapImage}
-            alt="마리아쥬스퀘어 약도"
-            style={{
-              width: "100%",
-              height: "100%",
-              objectFit: "cover",
-              display: "block",
-            }}
-          />
-        </div>
+        />
       </div>
 
       <Spacing height={37} />
@@ -102,6 +94,7 @@ export default function LocationSection() {
             target="_blank"
             rel="noopener noreferrer"
             style={{
+              flex: "1 1 110px",
               display: "flex",
               alignItems: "center",
               justifyContent: "center",
@@ -119,20 +112,17 @@ export default function LocationSection() {
               style={{
                 width: "14px",
                 height: "14px",
+                backgroundImage: `url(${btn.icon})`,
+                backgroundSize: "cover",
+                backgroundPosition: "center",
               }}
-            >
-              <img
-                src={btn.icon}
-                alt={btn.label}
-                style={{ width: "100%", height: "100%", objectFit: "cover" }}
-              />
-            </div>
+            />
             <div
               style={{
-                fontFamily: "var(--font-sans)",
                 fontWeight: 400,
                 fontSize: 13,
                 color: "#000",
+                fontFamily: "var(--font-sans)",
               }}
             >
               {btn.label}
@@ -204,9 +194,13 @@ export default function LocationSection() {
               color: "#000",
             }}
           >
-            <div>네비게이션 : '마리아쥬스퀘어' 검색</div>
+            <div style={{ fontFamily: "var(--font-sans)" }}>
+              네비게이션 : '마리아쥬스퀘어' 검색
+            </div>
             <Spacing height={12} />
-            <div>서울 강남구 도산대로 318</div>
+            <div style={{ fontFamily: "var(--font-sans)" }}>
+              서울 강남구 도산대로 318
+            </div>
           </div>
         </TransportItem>
 

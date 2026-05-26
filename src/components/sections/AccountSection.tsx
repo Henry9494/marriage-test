@@ -59,6 +59,7 @@ export default function AccountSection() {
             fontSize: 16,
             color: "#00a8a6",
             textAlign: "center",
+            fontFamily: "var(--font-display)",
           }}
         >
           마음전하실곳
@@ -74,6 +75,7 @@ export default function AccountSection() {
             opacity: 0.5,
             lineHeight: "normal",
             textAlign: "center",
+            fontFamily: "var(--font-sans)",
           }}
         >
           참석이 어려우신 분들을 위해 기재했습니다
