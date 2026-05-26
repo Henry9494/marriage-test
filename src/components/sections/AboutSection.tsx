@@ -1,6 +1,7 @@
 import { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { MAX_WIDTH } from "../../constants";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -64,7 +65,7 @@ export default function AboutSection() {
           }}
         >
           <img
-            src="https://placehold.co/390x900/2c3e50/2c3e50"
+            src={`https://placehold.co/${MAX_WIDTH}x900/2c3e50/2c3e50`}
             alt=""
             style={{ width: "100%", height: "100%", objectFit: "cover" }}
           />
@@ -87,7 +88,7 @@ export default function AboutSection() {
           }}
         >
           <img
-            src="https://placehold.co/390x900/3d2c1e/3d2c1e"
+            src={`https://placehold.co/${MAX_WIDTH}x900/3d2c1e/3d2c1e`}
             alt=""
             style={{ width: "100%", height: "100%", objectFit: "cover" }}
           />
@@ -110,7 +111,7 @@ export default function AboutSection() {
           }}
         >
           <img
-            src="https://placehold.co/390x900/1a2a1a/1a2a1a"
+            src={`https://placehold.co/${MAX_WIDTH}x900/1a2a1a/1a2a1a`}
             alt=""
             style={{ width: "100%", height: "100%", objectFit: "cover" }}
           />

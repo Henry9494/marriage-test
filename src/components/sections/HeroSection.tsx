@@ -1,6 +1,7 @@
 import { valueWithRatio } from "@/utils";
 import heroBg from "../../assets/hero-bg.webp";
 import { useScale } from "@/context/ScaleContext";
+import { MAX_WIDTH } from "@/constants";
 import { Spacing } from "../Spacing";
 
 export default function HeroSection() {
@@ -10,7 +11,7 @@ export default function HeroSection() {
     <>
       <section
         style={{
-          aspectRatio: "390 / 844",
+          aspectRatio: `${MAX_WIDTH} / 844`,
         }}
       >
         <img

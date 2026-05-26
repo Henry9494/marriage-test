@@ -2,6 +2,7 @@ import accountBg from "../../assets/account-bg.webp";
 import { Spacing } from "../Spacing";
 import { useScale } from "../../context/ScaleContext";
 import { valueWithRatio } from "../../utils";
+import { MAX_WIDTH } from "../../constants";
 
 interface AccountEntry {
   name: string;
@@ -41,7 +42,7 @@ export default function AccountSection() {
   return (
     <section
       style={{
-        aspectRatio: "390 / 975",
+        aspectRatio: `${MAX_WIDTH} / 975`,
         position: "relative",
         backgroundImage: `url(${accountBg})`,
         backgroundSize: "cover",
