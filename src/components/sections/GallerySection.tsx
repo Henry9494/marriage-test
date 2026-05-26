@@ -7,6 +7,8 @@ import iconClose from "../../assets/icon-close.svg";
 import iconArrowLeft from "../../assets/icon-arrow-left.svg";
 import iconArrowRight from "../../assets/icon-arrow-right.svg";
 import { Spacing } from "../Spacing";
+import { useScale } from "../../context/ScaleContext";
+import { valueWithRatio } from "../../utils";
 
 // 각 컬럼이 embla 슬라이드 하나가 됨 (item.id - 1 = 갤러리 전체 index)
 interface ColumnItem {
@@ -306,6 +308,8 @@ export default function GallerySection() {
   const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
   const [galleryRef] = useEmblaCarousel({ dragFree: true, align: "start" });
 
+  const scale = useScale();
+
   return (
     <section style={{ backgroundColor: "#fafafa" }}>
       <Spacing height={88} />
@@ -329,7 +333,9 @@ export default function GallerySection() {
 
       {/* embla 갤러리 가로 스크롤 (dragFree, 컬럼별 슬라이드) */}
       <div ref={galleryRef} style={{ overflow: "hidden" }}>
-        <div style={{ display: "flex", paddingLeft: 16 }}>
+        <div
+          style={{ display: "flex", paddingLeft: valueWithRatio(16, scale) }}
+        >
           {GALLERY_COLUMNS.map((col, colIndex) => {
             const prevItemCount = GALLERY_COLUMNS.slice(0, colIndex).reduce(
               (sum, c) => sum + c.items.length,
@@ -381,7 +387,7 @@ export default function GallerySection() {
             );
           })}
           {/* 오른쪽 끝 패딩용 스페이서 */}
-          <div style={{ width: 16, flexShrink: 0 }} />
+          <div style={{ width: valueWithRatio(16, scale), flexShrink: 0 }} />
         </div>
       </div>
 
