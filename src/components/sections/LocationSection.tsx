@@ -178,9 +178,12 @@ export default function LocationSection() {
                 fontWeight: 400,
                 fontSize: 13,
                 fontFamily: "var(--font-sans)",
+                lineHeight: "normal",
               }}
             >
-              강남구청역 3번출구 (셔틀버스 운행)
+              [도보] 강남구청역 3-1번 출구에서 약 10분
+              <br />
+              [셔틀] 강남구청역 3번 출구 수시 운행
             </div>
           </div>
         </TransportItem>
@@ -194,13 +197,29 @@ export default function LocationSection() {
               color: "#000",
             }}
           >
-            <div style={{ fontFamily: "var(--font-sans)" }}>
+            <p
+              style={{
+                fontFamily: "var(--font-sans)",
+                fontWeight: 400,
+                fontSize: 13,
+                lineHeight: "normal",
+                margin: 0,
+              }}
+            >
               네비게이션 : '마리아쥬스퀘어' 검색
-            </div>
+            </p>
             <Spacing height={12} />
-            <div style={{ fontFamily: "var(--font-sans)" }}>
+            <p
+              style={{
+                fontFamily: "var(--font-sans)",
+                fontWeight: 400,
+                fontSize: 13,
+                lineHeight: "normal",
+                margin: 0,
+              }}
+            >
               서울 강남구 도산대로 318
-            </div>
+            </p>
           </div>
         </TransportItem>
 
@@ -212,6 +231,7 @@ export default function LocationSection() {
               fontSize: "13px",
               color: "#000",
               margin: 0,
+              lineHeight: "normal",
             }}
           >
             SB타워 B2~B4층 ( 주차장 입구 : 건물후면 )
