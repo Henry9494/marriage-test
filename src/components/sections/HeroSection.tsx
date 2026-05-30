@@ -10,7 +10,7 @@ export default function HeroSection() {
     <>
       <section
         style={{
-          aspectRatio: "61 / 132",
+          aspectRatio: "390 / 760",
           backgroundImage: `url(${heroBg})`,
           backgroundSize: "cover",
           backgroundPosition: "center",
@@ -21,7 +21,7 @@ export default function HeroSection() {
         style={{
           padding: `0 ${valueWithRatio(25, scale)}px`,
           backgroundColor: "#fff",
-          fontFamily: "var(--font-display)",
+          fontFamily: "var(--font-sans)",
         }}
       >
         <Spacing height={22} />
@@ -31,24 +31,25 @@ export default function HeroSection() {
             fontSize: 24,
             lineHeight: "108%",
             letterSpacing: "-1.296px",
-            fontFamily: "var(--font-display)",
+            fontFamily: "var(--font-sans)",
           }}
         >
-          {"{ "}2026년 9월 20일 일요일 오후 1시{" }"}
+          ( 2026년 9월 20일 일요일 오후 1시 )
           <br />
           <span
             style={{
               fontSize: 24,
               fontWeight: 700,
-              fontFamily: "var(--font-display)",
+              fontFamily: "var(--font-sans)",
               lineHeight: "108%",
               letterSpacing: "-1.296px",
             }}
           >
-            {" "}
-            * 마리아쥬스퀘어 *{" "}
-          </span>
-          우리의 새출발에 소중한 분들을 초대합니다.
+            * 마리아쥬스퀘어 *
+          </span>{" "}
+          우리의 새출발에
+          <br />
+          소중한 분들을 초대합니다.
         </div>
         <Spacing height={124} />
       </section>

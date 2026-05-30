@@ -18,6 +18,18 @@ const GROOM_ACCOUNTS: AccountEntry[] = [
     account: "123-1234-1234-12",
     value: 12341234123412,
   },
+  {
+    name: "김제형",
+    bank: "국민은행",
+    account: "123-1234-1234-12",
+    value: 12341234123412,
+  },
+  {
+    name: "김제형",
+    bank: "국민은행",
+    account: "123-1234-1234-12",
+    value: 12341234123412,
+  },
 ];
 
 const BRIDE_ACCOUNTS: AccountEntry[] = [

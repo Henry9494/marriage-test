@@ -5,9 +5,17 @@ import aboutSection1Bg from "../../assets/about-section-1-bg.webp";
 import aboutSection2Bg from "../../assets/about-section-2-bg.webp";
 import aboutSection3Bg from "../../assets/about-section-3-bg.webp";
 import aboutSection1Title from "../../assets/about-section-1-title.webp";
-import aboutSection1Detail from "../../assets/about-section-1-detail.webp";
-import aboutSection2Detail from "../../assets/about-section-2-detail.webp";
-import aboutSection3Detail from "../../assets/about-section-3-detail.webp";
+import aboutSection1Text from "../../assets/about-section-1-text.webp";
+import aboutSection1Image from "../../assets/about-section-1-image.webp";
+
+import aboutSection2Text from "../../assets/about-section-2-text.webp";
+import aboutSection2Image from "../../assets/about-section-2-image.webp";
+
+import aboutSection3Image from "../../assets/about-section-3-image.webp";
+
+// import aboutSection1Detail from "../../assets/about-section-1-detail.webp";
+// import aboutSection2Detail from "../../assets/about-section-2-detail.webp";
+// import aboutSection3Detail from "../../assets/about-section-3-detail.webp";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -19,6 +27,8 @@ export default function AboutSection() {
   const section1Ref = useRef<HTMLDivElement>(null);
   const section2Ref = useRef<HTMLDivElement>(null);
   const section3Ref = useRef<HTMLDivElement>(null);
+  const image1Ref = useRef<HTMLDivElement>(null);
+  const image2Ref = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const ctx = gsap.context(() => {
@@ -47,6 +57,38 @@ export default function AboutSection() {
         })
         .to(bg2Ref.current, { opacity: 0 }, 0)
         .to(bg3Ref.current, { opacity: 1 }, 0);
+
+      // section1 이미지: 스크롤에 완전 연동, 아래에서 위로 올라옴
+      gsap.fromTo(
+        image1Ref.current,
+        { y: 250 },
+        {
+          y: -180,
+          ease: "none",
+          scrollTrigger: {
+            trigger: section1Ref.current,
+            start: "top bottom",
+            end: "bottom top",
+            scrub: true,
+          },
+        },
+      );
+
+      // section2 이미지: 스크롤에 완전 연동, 아래에서 위로 올라옴
+      gsap.fromTo(
+        image2Ref.current,
+        { y: 350 },
+        {
+          y: -280,
+          ease: "none",
+          scrollTrigger: {
+            trigger: section2Ref.current,
+            start: "top bottom",
+            end: "bottom top",
+            scrub: true,
+          },
+        },
+      );
     }, containerRef);
 
     return () => ctx.revert();
@@ -162,9 +204,23 @@ export default function AboutSection() {
               position: "absolute",
               left: `${(53 * 100) / 390}%`,
               bottom: `${(48 * 100) / 721}%`,
-              width: `${(310 * 100) / 390}%`,
-              aspectRatio: 310 / 393,
-              backgroundImage: `url(${aboutSection1Detail})`,
+              width: `${(250 * 100) / 390}%`,
+              aspectRatio: 250 / 437,
+              backgroundImage: `url(${aboutSection1Text})`,
+              backgroundSize: "cover",
+              backgroundPosition: "center",
+            }}
+          />
+
+          <div
+            ref={image1Ref}
+            style={{
+              position: "absolute",
+              left: `${(163 * 100) / 390}%`,
+              bottom: `${(151 * 100) / 721}%`,
+              width: `${(200 * 100) / 390}%`,
+              aspectRatio: 200 / 200,
+              backgroundImage: `url(${aboutSection1Image})`,
               backgroundSize: "cover",
               backgroundPosition: "center",
             }}
@@ -182,11 +238,25 @@ export default function AboutSection() {
           <div
             style={{
               position: "absolute",
-              left: `${(45 * 100) / 390}%`,
+              left: `${(68 * 100) / 390}%`,
               bottom: `${(132 * 100) / 721}%`,
-              width: `${(294 * 100) / 390}%`,
-              aspectRatio: 294 / 393,
-              backgroundImage: `url(${aboutSection2Detail})`,
+              width: `${(285 * 100) / 390}%`,
+              aspectRatio: 285 / 434,
+              backgroundImage: `url(${aboutSection2Text})`,
+              backgroundSize: "cover",
+              backgroundPosition: "center",
+            }}
+          />
+
+          <div
+            ref={image2Ref}
+            style={{
+              position: "absolute",
+              left: `${(45 * 100) / 390}%`,
+              bottom: `${(235 * 100) / 721}%`,
+              width: `${(200 * 100) / 390}%`,
+              aspectRatio: 200 / 200,
+              backgroundImage: `url(${aboutSection2Image})`,
               backgroundSize: "cover",
               backgroundPosition: "center",
             }}
@@ -209,9 +279,10 @@ export default function AboutSection() {
               top: "50%",
               transform: "translateY(-50%)",
               aspectRatio: 334 / 198,
-              backgroundImage: `url(${aboutSection3Detail})`,
+              backgroundImage: `url(${aboutSection3Image})`,
               backgroundSize: "cover",
               backgroundPosition: "center",
+              backdropFilter: "blur(7px)",
             }}
           />
         </div>

@@ -1,4 +1,4 @@
-import { useState, useCallback, useEffect } from "react";
+import { useState, useCallback, useEffect, useRef } from "react";
 
 const galleryImages = import.meta.glob<string>("../../assets/gallery/*.webp", {
   eager: true,
@@ -16,7 +16,6 @@ import iconArrowRight from "../../assets/icon-arrow-right.svg";
 import { Spacing } from "../Spacing";
 import { useScale } from "../../context/ScaleContext";
 import { valueWithRatio } from "../../utils";
-import { RemoveScroll } from "react-remove-scroll";
 
 // 각 컬럼이 embla 슬라이드 하나가 됨 (item.id - 1 = 갤러리 전체 index)
 interface ColumnItem {
@@ -125,7 +124,7 @@ interface GalleryModalProps {
 
 function GalleryModal({ initialIndex, onClose }: GalleryModalProps) {
   const [emblaRef, emblaApi] = useEmblaCarousel(
-    { loop: true, startIndex: initialIndex },
+    { loop: true, startIndex: initialIndex, watchDrag: false },
     [Fade()],
   );
   const [currentIndex, setCurrentIndex] = useState(initialIndex);
@@ -142,8 +141,22 @@ function GalleryModal({ initialIndex, onClose }: GalleryModalProps) {
   const goPrev = useCallback(() => emblaApi?.scrollPrev(), [emblaApi]);
   const goNext = useCallback(() => emblaApi?.scrollNext(), [emblaApi]);
 
+  const touchStartX = useRef(0);
+  const handleTouchStart = useCallback((e: React.TouchEvent) => {
+    touchStartX.current = e.touches[0].clientX;
+  }, []);
+  const handleTouchEnd = useCallback(
+    (e: React.TouchEvent) => {
+      const delta = e.changedTouches[0].clientX - touchStartX.current;
+      if (Math.abs(delta) > 40) {
+        if (delta > 0) goPrev();
+        else goNext();
+      }
+    },
+    [goPrev, goNext],
+  );
+
   return (
-    // <RemoveScroll>
     <motion.div
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
@@ -152,7 +165,8 @@ function GalleryModal({ initialIndex, onClose }: GalleryModalProps) {
       role="dialog"
       aria-modal="true"
       aria-label="갤러리 이미지"
-      onClick={onClose}
+      onTouchStart={handleTouchStart}
+      onTouchEnd={handleTouchEnd}
       style={{
         position: "fixed",
         top: 0,
@@ -169,16 +183,23 @@ function GalleryModal({ initialIndex, onClose }: GalleryModalProps) {
     >
       <div
         onClick={(e) => e.stopPropagation()}
-        style={{ width: "90vw", maxWidth: 360 }}
+        style={{
+          width: "90vw",
+          height: "90vh",
+          maxWidth: 360,
+          position: "relative",
+        }}
       >
         {/* 헤더: 카운터 + 닫기 */}
         <div
           style={{
-            position: "relative",
+            position: "absolute",
+            top: 0,
+            width: "100%",
             display: "flex",
             justifyContent: "center",
             alignItems: "center",
-            height: 16,
+            height: 30,
           }}
         >
           <span
@@ -204,10 +225,15 @@ function GalleryModal({ initialIndex, onClose }: GalleryModalProps) {
               top: "50%",
               transform: "translateY(-50%)",
               background: "none",
-              border: "none",
               cursor: "pointer",
               padding: 0,
               lineHeight: 0,
+              border: "none",
+              width: 30,
+              height: 30,
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
             }}
           >
             <img
@@ -218,10 +244,15 @@ function GalleryModal({ initialIndex, onClose }: GalleryModalProps) {
           </button>
         </div>
 
-        <Spacing height={53} />
-
         {/* 이미지 캐러셀 + 화살표 */}
-        <div style={{ position: "relative" }}>
+        <div
+          style={{
+            position: "absolute",
+            top: "50%",
+            transform: "translateY(-50%)",
+            width: "100%",
+          }}
+        >
           <div
             ref={emblaRef}
             style={{
@@ -307,7 +338,6 @@ function GalleryModal({ initialIndex, onClose }: GalleryModalProps) {
         </div>
       </div>
     </motion.div>
-    // </RemoveScroll>
   );
 }
 
