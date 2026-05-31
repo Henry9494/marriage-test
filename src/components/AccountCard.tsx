@@ -124,6 +124,7 @@ function CopyButton({ value }: { value: number }) {
       style={{
         width: "max-content",
         background: "#fff",
+        color: "#000",
         border: "1px solid #e7e7e7",
         borderRadius: "4px",
         padding: "6px 10px",
@@ -133,7 +134,7 @@ function CopyButton({ value }: { value: number }) {
         cursor: "pointer",
       }}
     >
-      복사하기
+      계좌복사
     </button>
   );
 }

@@ -10,14 +10,14 @@ interface ContactEntry {
 
 const GROOM_CONTACTS: ContactEntry[] = [
   { label: "신랑 김제형 전화하기", phone: "010-2976-6446" },
-  { label: "아버지 김상욱 전화하기", phone: "010-1234-1234" },
-  { label: "어머니 이미자 전화하기", phone: "010-1234-1234" },
+  { label: "아버지 김상욱 전화하기", phone: "010-7289-8202" },
+  { label: "어머니 이미자 전화하기", phone: "010-3080-5152" },
 ];
 
 const BRIDE_CONTACTS: ContactEntry[] = [
   { label: "신부 김민아 전화하기", phone: "010-2395-3854" },
-  { label: "아버지 김의진 전화하기", phone: "010-1234-1234" },
-  { label: "어머니 김인숙 전화하기", phone: "010-1234-1234" },
+  { label: "아버지 김의진 전화하기", phone: "010-9030-3854" },
+  { label: "어머니 김인숙 전화하기", phone: "010-9275-3854" },
 ];
 
 export function ContactModal({

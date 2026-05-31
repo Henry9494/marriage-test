@@ -10,22 +10,22 @@ import { ContactModal } from "../ContactModal";
 
 const GROOM_ACCOUNTS: AccountEntry[] = [
   {
-    name: "김제형",
-    bank: "국민은행",
-    account: "123-1234-1234-12",
-    value: 12341234123412,
+    name: "김상욱",
+    bank: "하나은행",
+    account: "21189090565607",
+    value: 21189090565607,
+  },
+  {
+    name: "이미자",
+    bank: "하나은행",
+    account: "21189090565607",
+    value: 21189090565607,
   },
   {
     name: "김제형",
-    bank: "국민은행",
-    account: "123-1234-1234-12",
-    value: 12341234123412,
-  },
-  {
-    name: "김제형",
-    bank: "국민은행",
-    account: "123-1234-1234-12",
-    value: 12341234123412,
+    bank: "하나은행",
+    account: "21189090565607",
+    value: 21189090565607,
   },
 ];
 
@@ -116,7 +116,10 @@ export default function AccountSection() {
         축하 연락하기
       </button>
 
-      <ContactModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
+      <ContactModal
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+      />
 
       <Spacing height={32} />
 
