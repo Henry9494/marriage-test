@@ -1,3 +1,4 @@
+import { enqueueSnackbar } from "notistack";
 import { Spacing } from "./Spacing";
 
 export interface AccountEntry {
@@ -100,6 +101,21 @@ function CopyButton({ value }: { value: number }) {
       document.execCommand("copy");
       document.body.removeChild(el);
     }
+
+    enqueueSnackbar("복사되었습니다.", {
+      variant: "default",
+      style: {
+        fontFamily: "var(--font-sans)",
+        fontWeight: 400,
+        fontSize: "13px",
+        textAlign: "center",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        backgroundColor: "#333",
+        borderRadius: "6px",
+      },
+    });
   };
 
   return (

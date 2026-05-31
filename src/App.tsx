@@ -7,6 +7,7 @@ import GallerySection from "./components/sections/GallerySection";
 import LocationSection from "./components/sections/LocationSection";
 import AccountSection from "./components/sections/AccountSection";
 import Loader from "./components/Loader";
+import { SnackbarProvider } from "notistack";
 
 export default function App() {
   const [loading, setLoading] = useState(true);
@@ -19,13 +20,18 @@ export default function App() {
   }, []);
 
   return (
-    <ScaleProvider>
-      <AnimatePresence>{loading && <Loader />}</AnimatePresence>
-      <HeroSection />
-      <AboutSection />
-      <GallerySection />
-      <LocationSection />
-      <AccountSection />
-    </ScaleProvider>
+    <SnackbarProvider
+      maxSnack={1}
+      anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
+    >
+      <ScaleProvider>
+        <AnimatePresence>{loading && <Loader />}</AnimatePresence>
+        <HeroSection />
+        <AboutSection />
+        <GallerySection />
+        <LocationSection />
+        <AccountSection />
+      </ScaleProvider>
+    </SnackbarProvider>
   );
 }
