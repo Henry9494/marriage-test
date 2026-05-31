@@ -1,15 +1,12 @@
+import { useState } from "react";
 import accountBg from "../../assets/account-bg.webp";
 import { Spacing } from "../Spacing";
 import { useScale } from "../../context/ScaleContext";
 import { valueWithRatio } from "../../utils";
 import { MAX_WIDTH } from "../../constants";
-
-interface AccountEntry {
-  name: string;
-  bank: string;
-  account: string;
-  value: number;
-}
+import { AccountCard } from "../AccountCard";
+import type { AccountEntry } from "../AccountCard";
+import { ContactModal } from "../ContactModal";
 
 const GROOM_ACCOUNTS: AccountEntry[] = [
   {
@@ -50,6 +47,7 @@ const BRIDE_ACCOUNTS: AccountEntry[] = [
 
 export default function AccountSection() {
   const scale = useScale();
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   return (
     <section
@@ -96,7 +94,31 @@ export default function AccountSection() {
         </div>
       </div>
 
-      <Spacing height={18} />
+      <Spacing height={16} />
+
+      <button
+        onClick={() => setIsModalOpen(true)}
+        style={{
+          width: "100%",
+          padding: 10,
+          borderRadius: 4,
+          background: "linear-gradient(90deg, #24CCC9 0%, #00B9B5 100%)",
+          color: "#fff",
+          fontFamily: "var(--font-sans)",
+          fontSize: 16,
+          fontWeight: 700,
+          textAlign: "center",
+          lineHeight: "normal",
+          border: "none",
+          cursor: "pointer",
+        }}
+      >
+        축하 연락하기
+      </button>
+
+      <ContactModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
+
+      <Spacing height={32} />
 
       <AccountCard title="신랑측 계좌번호" accounts={GROOM_ACCOUNTS} />
 
@@ -122,120 +144,5 @@ export default function AccountSection() {
         웃음을 못멈춰서..
       </div>
     </section>
-  );
-}
-
-function AccountCard({
-  title,
-  accounts,
-}: {
-  title: string;
-  accounts: AccountEntry[];
-}) {
-  return (
-    <div
-      style={{
-        background: "#fafafa",
-        borderRadius: 4,
-        padding: 16,
-      }}
-    >
-      <div
-        style={{
-          fontFamily: "var(--font-sans)",
-          fontWeight: 400,
-          fontSize: 13,
-        }}
-      >
-        {title}
-      </div>
-
-      <Spacing height={16} />
-
-      {accounts.map((acc, i) => (
-        <div key={i}>
-          {i > 0 && (
-            <>
-              <Spacing height={16} />
-              <div
-                style={{
-                  height: "1px",
-                  background: "#e7e7e7",
-                }}
-              />
-              <Spacing height={16} />
-            </>
-          )}
-          <div
-            style={{
-              display: "flex",
-              alignItems: "flex-end",
-              justifyContent: "space-between",
-              gap: 16,
-            }}
-          >
-            <div style={{ flex: 1 }}>
-              <div
-                style={{
-                  fontFamily: "var(--font-sans)",
-                  fontWeight: 600,
-                  fontSize: "13px",
-                }}
-              >
-                {acc.name}
-              </div>
-
-              <Spacing height={6} />
-
-              <div
-                style={{
-                  fontFamily: "var(--font-sans)",
-                  fontWeight: 400,
-                  fontSize: "13px",
-                }}
-              >
-                {acc.bank} {acc.account}
-              </div>
-            </div>
-
-            <CopyButton value={acc.value} />
-          </div>
-        </div>
-      ))}
-    </div>
-  );
-}
-
-function CopyButton({ value }: { value: number }) {
-  const handleCopy = async () => {
-    try {
-      await navigator.clipboard.writeText(value.toString());
-    } catch {
-      const el = document.createElement("input");
-      el.value = value.toString();
-      document.body.appendChild(el);
-      el.select();
-      document.execCommand("copy");
-      document.body.removeChild(el);
-    }
-  };
-
-  return (
-    <button
-      onClick={handleCopy}
-      style={{
-        width: "max-content",
-        background: "#fff",
-        border: "1px solid #e7e7e7",
-        borderRadius: "4px",
-        padding: "6px 10px",
-        fontFamily: "var(--font-sans)",
-        fontWeight: 400,
-        fontSize: "12px",
-        cursor: "pointer",
-      }}
-    >
-      복사하기
-    </button>
   );
 }
