@@ -37,7 +37,7 @@ export default function AboutSection() {
         .timeline({
           scrollTrigger: {
             trigger: section2Ref.current,
-            start: "top bottom",
+            start: "top center",
             end: "top top",
             scrub: true,
           },
@@ -50,7 +50,7 @@ export default function AboutSection() {
         .timeline({
           scrollTrigger: {
             trigger: section3Ref.current,
-            start: "top bottom",
+            start: "top center",
             end: "top top",
             scrub: true,
           },
