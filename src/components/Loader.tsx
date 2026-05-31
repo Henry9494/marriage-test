@@ -1,6 +1,5 @@
 import { motion } from "motion/react";
 import { RemoveScroll } from "react-remove-scroll";
-import loaderImage from "../assets/loader.webp";
 import { MAX_WIDTH } from "../constants";
 
 export default function Loader() {
@@ -14,14 +13,8 @@ export default function Loader() {
           position: "fixed",
           inset: 0,
           zIndex: 99999,
-          backgroundColor: "#fff",
+          backgroundColor: "#3CBCBA",
           display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          backgroundImage: `url(${loaderImage})`,
-          backgroundSize: "cover",
-          backgroundPosition: "center",
-          backgroundRepeat: "no-repeat",
           maxWidth: MAX_WIDTH,
           margin: "0 auto",
         }}
