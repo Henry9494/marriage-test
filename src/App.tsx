@@ -23,6 +23,7 @@ export default function App() {
     <SnackbarProvider
       maxSnack={1}
       anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
+      autoHideDuration={1500}
     >
       <ScaleProvider>
         <AnimatePresence>{loading && <Loader />}</AnimatePresence>

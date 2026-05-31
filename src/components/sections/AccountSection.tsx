@@ -12,20 +12,14 @@ const GROOM_ACCOUNTS: AccountEntry[] = [
   {
     name: "김제형",
     bank: "하나은행",
-    account: "21189090565607",
+    account: "211-890905-65607",
     value: 21189090565607,
   },
   {
     name: "김상욱",
     bank: "하나은행",
-    account: "21189090565607",
-    value: 21189090565607,
-  },
-  {
-    name: "이미자",
-    bank: "하나은행",
-    account: "21189090565607",
-    value: 21189090565607,
+    account: "159-890024-77007",
+    value: 15989002477007,
   },
 ];
 
