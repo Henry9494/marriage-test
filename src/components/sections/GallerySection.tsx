@@ -1,11 +1,11 @@
 import { useState, useCallback, useEffect, useRef } from "react";
 
-const galleryImages = import.meta.glob<string>("../../assets/gallery/*.webp", {
+const galleryImages = import.meta.glob<string>("../../assets/gallery/*.png", {
   eager: true,
   import: "default",
 });
 const getGalleryImage = (id: number): string =>
-  galleryImages[`../../assets/gallery/${id}.webp`] ?? "";
+  galleryImages[`../../assets/gallery/${id}.png`] ?? "";
 import { motion } from "motion/react";
 import useEmblaCarousel from "embla-carousel-react";
 import Fade from "embla-carousel-fade";
