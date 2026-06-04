@@ -95,6 +95,7 @@ export function ContactModal({
                       alignItems: "center",
                       justifyContent: "center",
                       padding: 15,
+                      height: 50,
                       background: "#f4f4f6",
                       borderRadius: 8,
                       fontFamily: "var(--font-sans)",
@@ -137,6 +138,7 @@ export function ContactModal({
                       alignItems: "center",
                       justifyContent: "center",
                       padding: 15,
+                      height: 50,
                       background: "#f4f4f6",
                       borderRadius: 8,
                       fontFamily: "var(--font-sans)",
@@ -166,6 +168,7 @@ export function ContactModal({
                   fontSize: 16,
                   color: "#fff",
                   cursor: "pointer",
+                  height: 50,
                   padding: 10,
                 }}
               >
