@@ -33,80 +33,56 @@ const GALLERY_COLUMNS: Column[] = [
   {
     width: 150,
     items: [
-      { id: 1, top: 0, height: 224 },
-      { id: 2, top: 230, height: 224 },
-      { id: 3, top: 460, height: 100 },
+      { id: 1, top: 0, height: 222 },
+      { id: 2, top: 228, height: 222 },
+      { id: 3, top: 456, height: 100 },
     ],
   },
   {
     width: 160,
     items: [
-      { id: 4, top: 0, height: 276 },
-      { id: 5, top: 282, height: 278 },
+      { id: 4, top: 0, height: 275 },
+      { id: 5, top: 281, height: 275 },
     ],
   },
   {
     width: 150,
     items: [
-      { id: 6, top: 0, height: 224 },
-      { id: 7, top: 230, height: 100 },
-      { id: 8, top: 336, height: 224 },
+      { id: 6, top: 0, height: 226 },
+      { id: 7, top: 232, height: 100 },
+      { id: 8, top: 338, height: 218 },
     ],
   },
   {
     width: 150,
     items: [
-      { id: 9, top: 0, height: 224 },
-      { id: 10, top: 230, height: 224 },
-      { id: 11, top: 460, height: 100 },
+      { id: 9, top: 0, height: 220 },
+      { id: 10, top: 226, height: 224 },
+      { id: 11, top: 456, height: 100 },
     ],
   },
   {
     width: 150,
     items: [
-      { id: 12, top: 0, height: 224 },
-      { id: 13, top: 230, height: 100 },
-      { id: 14, top: 336, height: 224 },
+      { id: 12, top: 0, height: 100 },
+      { id: 13, top: 106, height: 222 },
+      { id: 14, top: 334, height: 222 },
     ],
   },
   {
     width: 150,
     items: [
-      { id: 15, top: 0, height: 112 },
-      { id: 16, top: 118, height: 224 },
-      { id: 17, top: 348, height: 212 },
+      { id: 15, top: 0, height: 222 },
+      { id: 16, top: 228, height: 100 },
+      { id: 17, top: 334, height: 222 },
     ],
   },
   {
     width: 150,
     items: [
-      { id: 18, top: 0, height: 214 },
-      { id: 19, top: 220, height: 110 },
-      { id: 20, top: 336, height: 224 },
-    ],
-  },
-  {
-    width: 150,
-    items: [
-      { id: 21, top: 0, height: 100 },
-      { id: 22, top: 106, height: 224 },
-      { id: 23, top: 336, height: 224 },
-    ],
-  },
-  {
-    width: 150,
-    items: [
-      { id: 24, top: 0, height: 224 },
-      { id: 25, top: 230, height: 100 },
-      { id: 26, top: 336, height: 224 },
-    ],
-  },
-  {
-    width: 150,
-    items: [
-      { id: 27, top: 0, height: 214 },
-      { id: 28, top: 220, height: 226 },
-      { id: 29, top: 452, height: 108 },
+      { id: 18, top: 0, height: 218 },
+      { id: 19, top: 224, height: 202 },
+      { id: 20, top: 432, height: 124 },
     ],
   },
 ];
@@ -441,7 +417,7 @@ export default function GallerySection() {
         </div>
       </div>
 
-      <Spacing height={26} />
+      <Spacing height={30} />
 
       <div
         style={{
