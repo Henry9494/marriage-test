@@ -9,7 +9,7 @@ import aboutSection1Text from "../../assets/about-section-1-text.webp";
 import aboutSection1Image from "../../assets/about-section-1-image.webp";
 
 import aboutSection2Text from "../../assets/about-section-2-text.webp";
-import aboutSection2Image from "../../assets/about-section-2-image.webp";
+import aboutSection2Image from "../../assets/about-section-2-image.png";
 
 import aboutSection3Image from "../../assets/about-section-3-image.webp";
 
